@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  app:
+    image: ronnf89/prisma2fancydev
+    volumes:
+      - .:/src/app
+      - /var/www/node_modules
+    environment:
+      # - DEPLOY_ENV=dev
+      - DEPLOY_ENV=prod
+      - POSTGRES_URL=${POSTGRES_URL}
+      - APP_SECRET=${APP_SECRET}
+    ports:
+      - 8070:4000
+    restart: 'always'
+  studio:
+    image: ronnf89/prisma2fancydev
+    volumes:
+      - .:/src/app
+      - /var/www/node_modules
+    environment:
+      - DEPLOY_ENV=studio
+      - POSTGRES_URL=${POSTGRES_URL}
+      - APP_SECRET=${APP_SECRET}
+    ports:
+      - 8072:5555
+    restart: 'always'
